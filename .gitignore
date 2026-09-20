@@ -15,13 +15,17 @@
 !/chinese_names/SOURCES.md
 !/indian_names_1000_max5.txt
 !/indian_names_1000_max5_lowercase.txt
+!/indian_names_1000_max5_part2.txt
+!/indian_names_1000_max5_part2_lowercase.txt
 !/indian_names/
 !/indian_names/build_indian_names.py
 !/indian_names/name_evidence.csv
+!/indian_names/name_evidence_1001_2000.csv
 !/indian_names/SOURCES.md
 !/indian_names/raw/
 !/indian_names/raw/Indian_Names.csv
 !/run_indian_names_fetch.txt
+!/run_indian_names_part2_fetch.txt
 !/codeshare_fetcher/
 !/codeshare_fetcher/__init__.py
 !/codeshare_fetcher/extract.py

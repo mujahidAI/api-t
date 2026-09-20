@@ -108,13 +108,16 @@ def ranked_rows() -> list[dict[str, object]]:
 
 
 def write_outputs(rows: list[dict[str, object]]) -> None:
-    if len(rows) < 1000:
+    if len(rows) < 2000:
         raise ValueError(f"Only {len(rows)} source-backed Indian names were found.")
 
     OUT_DIR.mkdir(exist_ok=True)
     selected = rows[:1000]
+    selected_part2 = rows[1000:2000]
     names = [str(row["name"]) for row in selected]
     lower = [str(row["lowercase"]) for row in selected]
+    names_part2 = [str(row["name"]) for row in selected_part2]
+    lower_part2 = [str(row["lowercase"]) for row in selected_part2]
 
     (ROOT / "indian_names_1000_max5.txt").write_text(
         "\n".join(names) + "\n", encoding="utf-8"
@@ -122,27 +125,41 @@ def write_outputs(rows: list[dict[str, object]]) -> None:
     (ROOT / "indian_names_1000_max5_lowercase.txt").write_text(
         "\n".join(lower) + "\n", encoding="utf-8"
     )
+    (ROOT / "indian_names_1000_max5_part2.txt").write_text(
+        "\n".join(names_part2) + "\n", encoding="utf-8"
+    )
+    (ROOT / "indian_names_1000_max5_part2_lowercase.txt").write_text(
+        "\n".join(lower_part2) + "\n", encoding="utf-8"
+    )
+
+    fields = [
+        "rank",
+        "name",
+        "lowercase",
+        "gender",
+        "source_name",
+        "source",
+        "source_priority",
+        "frequency_code",
+        "source_row",
+    ]
 
     with (OUT_DIR / "name_evidence.csv").open("w", newline="", encoding="utf-8") as handle:
-        fields = [
-            "rank",
-            "name",
-            "lowercase",
-            "gender",
-            "source_name",
-            "source",
-            "source_priority",
-            "frequency_code",
-            "source_row",
-        ]
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         writer.writerows(selected)
 
+    with (OUT_DIR / "name_evidence_1001_2000.csv").open(
+        "w", newline="", encoding="utf-8"
+    ) as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(selected_part2)
+
     summary = [
         "# Indian names, max 5 letters",
         "",
-        "The root TXT file contains 1000 source-backed romanized Indian given-name entries.",
+        "The root TXT files contain two batches of 1000 source-backed romanized Indian given-name entries.",
         "Every output name is compact A-Z only and 2-5 letters long.",
         "Names from the frequency-coded India/Sri Lanka column of the Matthias Winkelmann / Jorg Michael firstname-database are ranked first.",
         "The remaining slots are filled from `raw/Indian_Names.csv`, an open Indian-name CSV, after filtering and deduping.",
@@ -152,14 +169,20 @@ def write_outputs(rows: list[dict[str, object]]) -> None:
         "",
         "- `../indian_names_1000_max5.txt`: Title Case list.",
         "- `../indian_names_1000_max5_lowercase.txt`: lowercase copy for URL or slug use.",
-        "- `name_evidence.csv`: rank, name, source spelling, source name, source priority, and frequency code when available.",
+        "- `../indian_names_1000_max5_part2.txt`: Title Case list for ranks 1001-2000.",
+        "- `../indian_names_1000_max5_part2_lowercase.txt`: lowercase copy for ranks 1001-2000.",
+        "- `name_evidence.csv`: rank, name, source spelling, source name, source priority, and frequency code when available for ranks 1-1000.",
+        "- `name_evidence_1001_2000.csv`: evidence for ranks 1001-2000.",
     ]
     (OUT_DIR / "SOURCES.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
 
     print(f"found {len(rows)} unique source-backed Indian names with max length 5")
-    print(f"wrote {len(selected)} names")
+    print(f"wrote {len(selected)} names to part 1")
+    print(f"wrote {len(selected_part2)} names to part 2")
     print(f"top name: {selected[0]['name']}")
     print(f"rank 1000: {selected[-1]['name']}")
+    print(f"rank 1001: {selected_part2[0]['name']}")
+    print(f"rank 2000: {selected_part2[-1]['name']}")
     print(f"primary-source names in output: {sum(row['source_priority'] == 1 for row in selected)}")
 
 
