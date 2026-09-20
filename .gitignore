@@ -7,6 +7,11 @@
 !/fetch_codeshares_common_names.py
 !/four_letter_names_1000_part2.txt
 !/four_letter_names_1000_part2_lowercase.txt
+!/four_letter_names_1000_part3.txt
+!/four_letter_names_1000_part3_lowercase.txt
+!/four_letter_names/
+!/four_letter_names/build_four_letter_names_part3_ssa.py
+!/four_letter_names/name_rank_evidence_part3_ssa.csv
 !/chinese_names_1000_max5.txt
 !/chinese_names_1000_max5_lowercase.txt
 !/chinese_names/
@@ -26,6 +31,7 @@
 !/indian_names/raw/Indian_Names.csv
 !/run_indian_names_fetch.txt
 !/run_indian_names_part2_fetch.txt
+!/run_four_letter_names_part3_fetch.txt
 !/codeshare_fetcher/
 !/codeshare_fetcher/__init__.py
 !/codeshare_fetcher/extract.py

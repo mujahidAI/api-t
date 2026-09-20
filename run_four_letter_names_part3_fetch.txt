@@ -1,0 +1,5 @@
+cd C:\Users\Mujahid\Desktop\api-t
+python fetch_codeshares_common_names.py --input four_letter_names_1000_part3_lowercase.txt --output codeshare_four_letter_names_part3_results.txt --workers 8 --interval 0.5
+
+Safer slower run if Codeshare starts challenging:
+python fetch_codeshares_common_names.py --input four_letter_names_1000_part3_lowercase.txt --output codeshare_four_letter_names_part3_results.txt --workers 2 --interval 3
