@@ -1,0 +1,5 @@
+cd C:\Users\Mujahid\Desktop\api-t
+python fetch_codeshares_common_names.py --input indian_names_1000_max5_lowercase.txt --output codeshare_indian_names_max5_results.txt --workers 8 --interval 0.5
+
+Safer slower run if Codeshare starts challenging:
+python fetch_codeshares_common_names.py --input indian_names_1000_max5_lowercase.txt --output codeshare_indian_names_max5_results.txt --workers 2 --interval 3
