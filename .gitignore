@@ -7,6 +7,12 @@
 !/fetch_codeshares_common_names.py
 !/four_letter_names_1000_part2.txt
 !/four_letter_names_1000_part2_lowercase.txt
+!/chinese_names_1000_max5.txt
+!/chinese_names_1000_max5_lowercase.txt
+!/chinese_names/
+!/chinese_names/build_chinese_names.py
+!/chinese_names/name_evidence.csv
+!/chinese_names/SOURCES.md
 !/codeshare_fetcher/
 !/codeshare_fetcher/__init__.py
 !/codeshare_fetcher/extract.py
